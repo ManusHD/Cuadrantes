@@ -1,13 +1,28 @@
 // Información de las personas
+const turnos = 22;
+const horasMes = 8 * turnos;
+const mesMes = 8;
+
+/*
+1 - Loli
+2 - Upe A
+3 - M José
+4 - Pilar
+5 - Bea
+6 - Upe B
+7 - Paqui
+8 - Yure
+*/
+
 const personas = [
-    {nombre: 'Loli', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Yure', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'M José', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Dolores', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Upe A', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Upe B', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Pilar', horas: 168, hUsadas: 0, hExtra: 0},
-    {nombre: 'Paqui', horas: 168, hUsadas: 0, hExtra: 0}
+    {nombre: 'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Upe B', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
+    {nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
 ];
 
 // Ciclo de 4 días
@@ -32,7 +47,8 @@ function generarCuadrante(mes, año) {
         for (let dia = 1; dia <= diasEnMes; dia++) {
             let cicloDia = ciclo[(cicloInicio + dia - 1) % 4];
             cicloDia.turnos.forEach(turno => {
-                cuadrante[dia - 1][turno].push(personas[i].nombre);
+                // cuadrante[dia - 1][turno].push(personas[i].nombre);
+                cuadrante[dia - 1][turno].push(i+1);
             });
             personas[i].hUsadas += cicloDia.horas;
             if (personas[i].hUsadas > personas[i].horas) {
@@ -87,8 +103,9 @@ function mostrarHorasTrabajadas() {
 }
 
 // Generar y mostrar cuadrante para un mes específico
-let mes = 9; // Agosto
+let mes = mesMes; // Agosto
 let año = 2024;
 let cuadrante = generarCuadrante(mes, año);
 mostrarCuadrante(cuadrante);
 mostrarHorasTrabajadas();
+
