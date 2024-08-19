@@ -1,7 +1,17 @@
-// Información de las personas
-const turnos = 22;
-const horasMes = 8 * turnos;
-const mesMes = 8;
+const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+var personas = [];
+var ciclo = [];
+
+var turnos = 0;
+var horasMes = 0;
+var cuadrante;
+
+var año = 2024;
+var mes = 9;
+
+var primeroGenerado = false;
 
 /*
 1 - Loli
@@ -14,24 +24,51 @@ const mesMes = 8;
 8 - Yure
 */
 
-const personas = [
-    {nombre: 'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Upe B', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
-    {nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
-];
+function iniciarArrays() {
+    /** 
+     *  horas: horas que debe trabajar al mes
+     *  hUsadas: horas trabajadas de las que debe trabajar al mes (max: horas máximas a trabajar de ese mes)
+     *  hExtra: horas extras de ese mes
+     */
+    personas = [
+        {ciclo: 0, nombre:'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 0, nombre:'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 3, nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 3, nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 2, nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 2, nombre: 'Upe B', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 1, nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: 1, nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
+    ];
+    
+    // Ciclo de 4 días
+    ciclo = [
+        { nombre: 'Día 1', turnos: ['Tarde'], horas: 8 },
+        { nombre: 'Día 2', turnos: ['Mañana', 'Noche'], horas: 16 },
+        { nombre: 'Día 3', turnos: [], horas: 0 },
+        { nombre: 'Día 4', turnos: [], horas: 0 }
+    ];
+}
 
-// Ciclo de 4 días
-const ciclo = [
-    { nombre: 'Día 1', turnos: ['Tarde'], horas: 8 },
-    { nombre: 'Día 2', turnos: ['Mañana', 'Noche'], horas: 16 },
-    { nombre: 'Día 3', turnos: [], horas: 0 },
-    { nombre: 'Día 4', turnos: [], horas: 0 }
-];
+function esDiaLaborable() {
+
+}
+
+function obtenerDiasLaborables (año, mes) {
+    let diasLaborables = 0;
+    let diasEnMes = new Date(año, mes, 0).getDate();
+    
+    for(let dia = 1; dia <= diasEnMes; dia++) {
+        const diaSemana = new Date(año, mes - 1, dia).getDay();
+        if(diaSemana >= 1 && diaSemana <= 5) {
+            diasLaborables++;
+        }
+    }
+
+    console.log(`Días laborables: ${diasLaborables}`);
+
+    return diasLaborables;
+}
 
 // Generar cuadrante mensual
 function generarCuadrante(mes, año) {
@@ -42,10 +79,13 @@ function generarCuadrante(mes, año) {
         Noche: []
     }));
 
+    /** cicloInicio: Decide la rotación inicial de cada persona, junto al (+0)
+     *  dia: Permite definir que ha cambiado el día y con esto deben cambiar los turnos, es decir, avanza el ciclo
+     */
     for (let i = 0; i < personas.length; i++) {
-        let cicloInicio = i % 4; // Rotación inicial para cada persona
+        let cicloInicio = personas[i].ciclo; // Rotación inicial para cada persona
         for (let dia = 1; dia <= diasEnMes; dia++) {
-            let cicloDia = ciclo[(cicloInicio + dia - 1) % 4];
+            let cicloDia = ciclo[(cicloInicio + dia + 0) % 4]; // El (+0) cambia el orden de como quedan los turnos, si se toca cambian de orden los turnos
             cicloDia.turnos.forEach(turno => {
                 // cuadrante[dia - 1][turno].push(personas[i].nombre);
                 cuadrante[dia - 1][turno].push(i+1);
@@ -54,6 +94,7 @@ function generarCuadrante(mes, año) {
             if (personas[i].hUsadas > personas[i].horas) {
                 personas[i].hExtra += personas[i].hUsadas - personas[i].horas;
                 personas[i].hUsadas = personas[i].horas; // No exceder horas normales
+                console.log(`${personas[i].nombre} -> Horas Extra: ${personas[i].hExtra}, Horas normales: ${personas[i].hUsadas}`);
             }
         }
     }
@@ -63,49 +104,157 @@ function generarCuadrante(mes, año) {
     return cuadrante;
 }
 
+function obtenerColor(ciclo) {
+    let bg = 'white';
+    switch(ciclo){
+        case 1:
+            bg = '#cdb4db';
+            break;
+        
+        case 2:
+            bg = '#cdb4db';
+            break;
+
+        case 3:
+            bg = '#ffafcc';
+            break;
+
+        case 4:
+            bg = '#ffafcc';
+            break;
+
+        case 5:
+            bg = '#bde0fe';
+            break;
+
+        case 6:
+            bg = '#bde0fe';
+            break;
+
+        case 7:
+            bg = '#a2d2ff';
+            break;
+
+        case 8:
+            bg = '#a2d2ff';
+            break;
+
+        case 'T':
+            bg = '#dad7cd';
+            break;
+
+        default:
+            bg = 'white';
+            break;
+    }
+
+    return bg;
+}
+
+function esLaborable(dia){
+    return dia >= 1 && dia <= 5;
+}
+
 // Mostrar cuadrante en la tabla HTML
-function mostrarCuadrante(cuadrante) {
+function mostrarCuadrante() {
+    var año = document.getElementById('año-cuadrante').value;
+    var mes = document.getElementById('mes-cuadrante').value;
+    console.log(`El año es: ${año}`);
+    console.log(`El mes es: ${mes}`);
+    turnos = obtenerDiasLaborables(año, mes);
+    horasMes = 8 * turnos;
+    iniciarArrays();
+    cuadrante = generarCuadrante(mes, año);
+
     const thead = document.querySelector("#cuadrante thead tr");
     const tbody = document.querySelector("#cuadrante tbody");
+    tbody.innerHTML = ""; // Limpiar el cuerpo de la tabla antes de llenarlo
 
     // Crear cabeceras para los días
-    for (let dia = 1; dia <= cuadrante.length; dia++) {
-        let th = document.createElement("th");
-        th.textContent = `${dia}`;
-        thead.appendChild(th);
+    if (!primeroGenerado) {
+        for (let dia = 1; dia <= cuadrante.length; dia++) {
+            let th = document.createElement("th");
+            th.textContent = `${dia}`;
+            thead.appendChild(th);
+        }
+        primeroGenerado = true;
     }
 
     // Crear filas para cada turno (Mañana, Tarde, Noche)
-    ['Mañana', 'Tarde', 'Noche'].forEach(turno => {
-        let row = document.createElement("tr");
-        let turnoCell = document.createElement("td");
-        turnoCell.textContent = turno;
-        row.appendChild(turnoCell);
+    ['Dirección', 'Mañana', 'Tarde', 'Noche'].forEach((turno, index) => {
+        let filas = []; // Guardar las filas para manejar el rowspan
+        let maxPersonasEnDia = 0; // Saber cuántas personas trabajan máximo en un día
 
-        cuadrante.forEach(dia => {
-            let cell = document.createElement("td");
-            cell.textContent = dia[turno].join(", ") || "-";
-            row.appendChild(cell);
+        cuadrante.forEach((dia, index) => {
+            const personasEnTurno = turno === 'Dirección' ? 1 : dia[turno].length;
+            maxPersonasEnDia = Math.max(maxPersonasEnDia, personasEnTurno);
         });
 
-        tbody.appendChild(row);
+        cuadrante.forEach((dia, index) => {
+            let diaConcreto = new Date(año, mes - 1, index + 1).getDay();
+            let personasTurno;
+
+            if (turno === 'Dirección') {
+                personasTurno = esLaborable(diaConcreto) ? 'T' : '';
+            } else {
+                personasTurno = dia[turno];
+            }
+
+            for (let i = 0; i < maxPersonasEnDia; i++) {
+                if (!filas[i]) {
+                    filas[i] = document.createElement("tr");
+                    if (i === 0) {
+                        let turnoCell = document.createElement("td");
+                        turnoCell.textContent = turno;
+                        turnoCell.rowSpan = maxPersonasEnDia;
+                        turnoCell.style.backgroundColor = '#219ebc';
+                        filas[i].appendChild(turnoCell);
+                    }
+                }
+
+                let cell = document.createElement("td");
+                cell.textContent = personasTurno[i] ? personasTurno[i] : "";
+                cell.style.backgroundColor = obtenerColor(personasTurno[i]);
+                filas[i].appendChild(cell);
+            }
+        });
+
+        filas.forEach(fila => {
+            tbody.appendChild(fila);
+        });
+
+        // Añadir una fila en blanco después de cada conjunto de turnos (excepto el último)
+        if (index != 0 && index < 3) { // Solo hasta el turno "Noche"
+            let filaBlanca = document.createElement("tr");
+            let cellBlanca = document.createElement("td");
+            cellBlanca.setAttribute("colspan", cuadrante.length + 1); // +1 por la columna de turnos
+            cellBlanca.innerHTML = "&nbsp;"; // Espacio en blanco
+            filaBlanca.appendChild(cellBlanca);
+            tbody.appendChild(filaBlanca);
+        }
     });
+
+    mostrarHorasTrabajadas();
 }
+
+
 
 // Mostrar horas trabajadas y extras en el HTML
 function mostrarHorasTrabajadas() {
     const ul = document.getElementById("horas-trabajadas");
+    ul.innerHTML = '';
     personas.forEach(persona => {
         let li = document.createElement("li");
-        li.textContent = `${persona.nombre}: ${persona.hUsadas} horas trabajadas, ${persona.hExtra} horas extra = ${persona.hExtra/8} turnos extras.`;
+        li.textContent = `${persona.nombre}: ${(persona.hExtra + persona.hUsadas)/8} turnos trabajados, ${persona.hExtra/8} son extras.`;
         ul.appendChild(li);
     });
+
+    const dl = document.getElementById('dias-laborables');
+    dl.textContent = turnos;
 }
 
-// Generar y mostrar cuadrante para un mes específico
-let mes = mesMes; // Agosto
-let año = 2024;
-let cuadrante = generarCuadrante(mes, año);
-mostrarCuadrante(cuadrante);
-mostrarHorasTrabajadas();
+function main() {
+    mostrarCuadrante();
+}
 
+main();

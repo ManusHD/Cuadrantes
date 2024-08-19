@@ -8,7 +8,39 @@
 </head>
 <body>
 
-    <h1>Cuadrante Mensual de Turnos</h1>
+    <h1>Generador Mensual de Turnos</h1>
+
+    <div class="formulario">
+        <div class="input-cuadrante">
+            <label for="año-cuadrante">Año: </label>
+            <input type="text" id="año-cuadrante" placeholder="Número del año" value="2024">
+        </div>
+
+        <div class="input-cuadrante">
+            <label for="mes-cuadrante">Mes: </label>
+            <select id="mes-cuadrante">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <div class="input-cuadrante">
+            <label for="ultimo-mes"></label>
+        </div>
+
+        <button onclick="mostrarCuadrante()">Crear cuadrante</button>
+    </div>
+
     <table id="cuadrante">
         <thead>
             <tr>
@@ -22,8 +54,8 @@
     </table>
 
     <h2>Horas Trabajadas</h2>
+    <p>Este mes tiene <span id=dias-laborables>0</span> días laborables</p>
     <ul id="horas-trabajadas"></ul>
-
     <script src="script.js"></script>
 
 </body>
