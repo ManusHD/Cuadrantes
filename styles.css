@@ -42,17 +42,9 @@ td {
 }
 
 td{
-    min-width: 80px;
+    min-width: 18px;
 }
 
 th {
     background-color: #669bbc;
-}
-
-tbody tr:not(:last-child) {
-    margin-bottom: 10px; /* Ajusta el valor según sea necesario */
-}
-
-tbody tr td {
-    padding-bottom: 10px; /* Si prefieres un espacio interno */
 }

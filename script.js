@@ -1,3 +1,15 @@
+
+/*
+1 - Loli
+2 - Upe A
+3 - M José
+4 - Pilar
+5 - Bea
+6 - Upe B
+7 - Paqui
+8 - Yure
+*/
+
 const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -13,32 +25,21 @@ var mes = 9;
 
 var primeroGenerado = false;
 
-/*
-1 - Loli
-2 - Upe A
-3 - M José
-4 - Pilar
-5 - Bea
-6 - Upe B
-7 - Paqui
-8 - Yure
-*/
-
-function iniciarArrays() {
+function iniciarArrays(ciclo1, ciclo2, ciclo3, ciclo4) {
     /** 
      *  horas: horas que debe trabajar al mes
      *  hUsadas: horas trabajadas de las que debe trabajar al mes (max: horas máximas a trabajar de ese mes)
      *  hExtra: horas extras de ese mes
-     */
+    */
     personas = [
-        {ciclo: 0, nombre:'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 0, nombre:'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 3, nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 3, nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 2, nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 2, nombre: 'Upe B', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 1, nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: 1, nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
+        {ciclo: ciclo1, nombre:'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo1, nombre:'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo2, nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo2, nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo3, nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo3, nombre: 'Upe B', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo4, nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo4, nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
     ];
     
     // Ciclo de 4 días
@@ -48,10 +49,6 @@ function iniciarArrays() {
         { nombre: 'Día 3', turnos: [], horas: 0 },
         { nombre: 'Día 4', turnos: [], horas: 0 }
     ];
-}
-
-function esDiaLaborable() {
-
 }
 
 function obtenerDiasLaborables (año, mes) {
@@ -94,7 +91,6 @@ function generarCuadrante(mes, año) {
             if (personas[i].hUsadas > personas[i].horas) {
                 personas[i].hExtra += personas[i].hUsadas - personas[i].horas;
                 personas[i].hUsadas = personas[i].horas; // No exceder horas normales
-                console.log(`${personas[i].nombre} -> Horas Extra: ${personas[i].hExtra}, Horas normales: ${personas[i].hUsadas}`);
             }
         }
     }
@@ -157,13 +153,25 @@ function esLaborable(dia){
 
 // Mostrar cuadrante en la tabla HTML
 function mostrarCuadrante() {
-    var año = document.getElementById('año-cuadrante').value;
-    var mes = document.getElementById('mes-cuadrante').value;
+    let año = document.getElementById('año-cuadrante').value;
+    let mes = document.getElementById('mes-cuadrante').value;
+    mes = parseInt(mes);
     console.log(`El año es: ${año}`);
     console.log(`El mes es: ${mes}`);
     turnos = obtenerDiasLaborables(año, mes);
     horasMes = 8 * turnos;
-    iniciarArrays();
+    let cicloSeleccionado = document.getElementById("comienza").value;
+    cicloSeleccionado = parseInt(cicloSeleccionado);
+    let ciclo1 = (3 + cicloSeleccionado) % 4;
+    let ciclo2 = (2 + cicloSeleccionado) % 4;
+    let ciclo3 = (1 + cicloSeleccionado) % 4;
+    let ciclo4 = (0 + cicloSeleccionado) % 4;
+    console.log(`Ciclo 1 (1-2): ${ciclo1}`);
+    console.log(`Ciclo 2 (3-4): ${ciclo2}`);
+    console.log(`Ciclo 3 (5-6): ${ciclo3}`);
+    console.log(`Ciclo 4 (7-8): ${ciclo4}`);
+    console.log(`Ciclo Seleccionado: ${cicloSeleccionado}`);
+    iniciarArrays(ciclo1, ciclo2, ciclo3, ciclo4);
     cuadrante = generarCuadrante(mes, año);
 
     const thead = document.querySelector("#cuadrante thead tr");
@@ -254,7 +262,7 @@ function mostrarHorasTrabajadas() {
 }
 
 function main() {
-    mostrarCuadrante();
+    
 }
 
 main();
