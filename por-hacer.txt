@@ -1,8 +1,8 @@
 ------------- POR HACER ----------------
 ---- GEROCULTORAS
-- Hacer al personal dinámico desde un Excel por si cambia
-- A la hora de generar el cuadrante de Gerocultores se deben indicar las noches y domingos trabajados
-- Para que se vean mejor lo trabajado y lo extra es mejor crear una tabla
+- Hacer al personal dinámico desde un Excel por si cambia - HECHO
+- A la hora de generar el cuadrante de Gerocultores se deben indicar las noches y domingos trabajados - HECHO
+- Para que se vean mejor lo trabajado y lo extra es mejor crear una tabla - HECHO
 
 ---- PERSONAL
 - Modificar la tabla para que se vea mejor, más legible. P.ej: Filas/Horas y Columnas/Días
@@ -20,3 +20,5 @@
 - ¿El rotativo cambia a lo largo de cada mes?
 - ¿Qué pasa si el mes se pasa de los días y parte una semana por la mitad? 
 
+- ¿qué pasa si un superfestivo cae en domingo, se paga como superfestivo solo? Al día siguiente sería fiesta, cómo se paga ese día?
+- ¿qué pasa si en un superfestivo alguien trabaja de Mañana-Noche, se cuentan como 2 turnos de superfestivo o solo 1?

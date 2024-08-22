@@ -36,6 +36,13 @@ a:hover {
     background-color: #0003c0;
 }
 
+caption {
+    background-color: #99b0be;
+    padding: 8px;
+    font-weight: bolder;
+    border: 1px solid black;
+    border-bottom: none;
+}
 
 table {
     border-collapse: collapse;
@@ -55,7 +62,7 @@ td {
 }
 
 td{
-    min-width: 18px;
+    min-width: 16px;
 }
 
 th {
