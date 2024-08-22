@@ -1,0 +1,60 @@
+David (40) -> Cocinero
+Susi (25) -> Gerocultora, Cocinero
+Amadori (26) -> Gerocultora, Cocinero
+Mavi (30) -> Gerocultora, Reparto
+Nines (30) -> Gerocultora, Reparto
+Raquel (24) -> Gerocultora
+
+[Entre paréntesis el número de horas semanales]
+
+
+------- HORARIOS -------
+--- MAÑANAS
+- Gerocultora 1 (Debe tener la función de "Reparto")
+Gerocultora -> 7:30 - 12:00 = +4.5
+Reparto -> 12:00 - 13:30 = +1.5
+SABADOS Y DOMINGOS ---> 7:30 - 14:30 (1 hora más de Reparto) = +1
+
+- Gerocultora 2 (No debe tener la función de "Reparto")
+Gerocultora -> 8:00 - 13:00 = +5
+LOS SABADOS y DOMINGOS DEBE HABER UNA TERCERA GEROCULTORA ---> Gerocultora -> 8:00 - 10:00 = +2
+
+- COCINERO
+TODOS LOS DIAS ---> Cocinero -> 7:00 - 15:00 = +8
+
+--- TARDES
+- Gerocultora 1
+GENERALMENTE ---> Gerocultora -> 18:30 - 22:00  = +3.5
+PERO SI SE PASA DE LAS HORAS SEMANALES DE MANERA SIGNIFICATIVA ---> Gerocultora -> 19:00 - 22:00 = +3
+
+- Gerocultora 2
+TODOS LOS DÍAS ---> Gerocultora -> 20:00 - 22:00 = +2  
+
+
+------------- ASPECTOS A TENER EN CUENTA ------------
+
+- Para repartir las horas de cada persona a lo largo de la semana puede que no dé las suficientes o dé horas de más alguna semana concreta, pero a final de mes debe tener las horas marcadas.
+
+- El TOTAL de horas al mes depende de cada uno, estos tienen sus horas que deben de cumplir (nada de horas extras)
+
+- Repartir los fines de semana de manera equitativa y que puedan librar el mismo número de fines de semana todos (No es lo mismo librar un MARTES que un SABADO y DOMINGO)
+
+- Se debe buscar en la medida de lo posible que los días a librar sean consecutivos
+
+- Aunque un mes unos libren más findes que otros, al siguiente eso podría cambiarse de alguna manera para ir regulando
+
+- Por las MAÑANAS y TARDES debe haber 2 Gerocultoras, por eso se superponen algunos horarios y el Cocinero va todos los días, pero solo va por las mañanas
+
+- Se deben de combinar y seguir los horarios anteriormente impuestos para crear el cuadrante
+
+- Las horas mensuales vienen dadas por las semanas, digamos que es un rotativo de 4 semanas en la que cada semana varía por el tema de findes de semanas a librar y demás cuestiones mencionadas anteriormente
+
+- Se consideran laborables de Lunes a Viernes
+
+- Se permite cierta flexibilidad en la rotación de fines de semana
+
+- Es preferible que una persona que trabaje el fin de semana lo haga ambos días
+
+- No hay preferencias o restricciones a tenerse en cuenta
+
+- Formato de salida para el cuadrante: HTML

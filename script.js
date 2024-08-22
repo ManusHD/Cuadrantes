@@ -25,15 +25,42 @@ var mes = 9;
 
 var primeroGenerado = false;
 
+function getPersonas() {
+    fetch('https://sheets.googleapis.com/v4/spreadsheets/1PEJsta5NLLjPgiaL4GCMc-e1MW-ykzG93et-6Zqb4xs/values/Cuadrantes!A2:B?key=AIzaSyD1qXjPmgBaRtX0zJtH76nvU708Gvs3A-g')
+    .then(response => response.json())
+    .then(data => {
+        const personasAux = data.values;
+
+        personasAux.forEach(p => {
+
+            let nCiclo = p[0];
+            nCiclo = parseInt(nCiclo);
+            
+            const persona = {ciclo: nCiclo, nombre: p[1], horas: horasMes, hUsadas: 0, hExtra: 0};
+            console.log("La persona creada es: ");
+            console.log(persona);
+
+            personas.push(persona);
+
+        });
+
+        
+
+    });
+}
+
 function iniciarArrays(ciclo1, ciclo2, ciclo3, ciclo4) {
     /** 
      *  horas: horas que debe trabajar al mes
      *  hUsadas: horas trabajadas de las que debe trabajar al mes (max: horas máximas a trabajar de ese mes)
      *  hExtra: horas extras de ese mes
+     * 
+     * Quiero que al crear una persona en el fetch quede con el nombre del parámetro que entra en la función, en vez de que se asigne a ciclo: 'ciclo3', quiero que se asigne el valor de ciclo3, todo dependiendo del número que llegue desde la API
     */
+
     personas = [
-        {ciclo: ciclo1, nombre:'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
-        {ciclo: ciclo1, nombre:'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo1, nombre: 'Loli', horas: horasMes, hUsadas: 0, hExtra: 0},
+        {ciclo: ciclo1, nombre: 'Upe A', horas: horasMes, hUsadas: 0, hExtra: 0},
         {ciclo: ciclo2, nombre: 'M José', horas: horasMes, hUsadas: 0, hExtra: 0},
         {ciclo: ciclo2, nombre: 'Pilar', horas: horasMes, hUsadas: 0, hExtra: 0},
         {ciclo: ciclo3, nombre: 'Bea', horas: horasMes, hUsadas: 0, hExtra: 0},
@@ -41,6 +68,8 @@ function iniciarArrays(ciclo1, ciclo2, ciclo3, ciclo4) {
         {ciclo: ciclo4, nombre: 'Paqui', horas: horasMes, hUsadas: 0, hExtra: 0},
         {ciclo: ciclo4, nombre: 'Yure', horas: horasMes, hUsadas: 0, hExtra: 0}
     ];
+
+    console.log(personas);
     
     // Ciclo de 4 días
     ciclo = [
@@ -153,8 +182,8 @@ function esLaborable(dia){
 
 // Mostrar cuadrante en la tabla HTML
 function mostrarCuadrante() {
-    let año = document.getElementById('año-cuadrante').value;
-    let mes = document.getElementById('mes-cuadrante').value;
+    año = document.getElementById('año-cuadrante').value;
+    mes = document.getElementById('mes-cuadrante').value;
     mes = parseInt(mes);
     console.log(`El año es: ${año}`);
     console.log(`El mes es: ${mes}`);
@@ -262,7 +291,7 @@ function mostrarHorasTrabajadas() {
 }
 
 function main() {
-    
+    getPersonas();
 }
 
 main();

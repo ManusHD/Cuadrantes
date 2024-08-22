@@ -1,0 +1,22 @@
+------------- POR HACER ----------------
+---- GEROCULTORAS
+- Hacer al personal dinámico desde un Excel por si cambia
+- A la hora de generar el cuadrante de Gerocultores se deben indicar las noches y domingos trabajados
+- Para que se vean mejor lo trabajado y lo extra es mejor crear una tabla
+
+---- PERSONAL
+- Modificar la tabla para que se vea mejor, más legible. P.ej: Filas/Horas y Columnas/Días
+
+---- FACTURAS
+- En las facturas añadir las letras de debajo de la factura a papel
+- Hacer las facturas dinámicas, para que se puedan modificar desde el Excel y se pongan directamente en el HTML
+
+------------- PREGUNTAS ----------------
+---- GEROCULTORAS
+- ¿Las noches y los domingos valen los mismo, es decir, se pagan igual?
+- En caso de que no, ¿Qué perdura ó es otro tipo de Extra digamos?
+
+---- PERSONAL
+- ¿El rotativo cambia a lo largo de cada mes?
+- ¿Qué pasa si el mes se pasa de los días y parte una semana por la mitad? 
+
