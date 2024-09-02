@@ -11,16 +11,16 @@ Raquel (24) -> Gerocultora
 ------- HORARIOS -------
 --- MAÑANAS
 - Gerocultora 1 (Debe tener la función de "Reparto")
-Gerocultora -> 7:30 - 12:00 = +4.5
-Reparto -> 12:00 - 13:30 = +1.5
-SABADOS Y DOMINGOS ---> 7:30 - 14:30 (1 hora más de Reparto) = +1
+Gerocultora -> 7:30 - 12:00
+Reparto -> 12:00 - 13:30
+SABADOS Y DOMINGOS ---> 7:30 - 14:30 (1 hora más de Reparto)
 
 - Gerocultora 2 (No debe tener la función de "Reparto")
-Gerocultora -> 8:00 - 13:00 = +5
-LOS SABADOS y DOMINGOS DEBE HABER UNA TERCERA GEROCULTORA ---> Gerocultora -> 8:00 - 10:00 = +2
+Gerocultora -> 8:00 - 13:00
+LOS SABADOS y DOMINGOS DEBE HABER UNA TERCERA GEROCULTORA ---> Gerocultora -> 8:00 - 10:00
 
 - COCINERO
-TODOS LOS DIAS ---> Cocinero -> 7:00 - 15:00 = +8
+TODOS LOS DIAS ---> Cocinero -> 7:00 - 15:00
 
 --- TARDES
 - Gerocultora 1
@@ -37,7 +37,7 @@ TODOS LOS DÍAS ---> Gerocultora -> 20:00 - 22:00 = +2
 
 - El TOTAL de horas al mes depende de cada uno, estos tienen sus horas que deben de cumplir (nada de horas extras)
 
-- Repartir los fines de semana de manera equitativa y que puedan librar el mismo número de fines de semana todos (No es lo mismo librar un MARTES que un SABADO y DOMINGO)
+- Repartir los fines de semana de manera equitativa y que puedan librar el mismo número de fines de semana todos (No es lo mismo librar un MARTES que un SABADO y DOMINGO), lo suyo sería hacer 3 cuadrantes en los que en cada uno 2 personas libren el fin de semana, es lo más fácil
 
 - Se debe buscar en la medida de lo posible que los días a librar sean consecutivos
 
@@ -51,10 +51,10 @@ TODOS LOS DÍAS ---> Gerocultora -> 20:00 - 22:00 = +2
 
 - Se consideran laborables de Lunes a Viernes
 
+- Si a una persona le faltan horas por gastar debe pasar lo siguiente: si es más de media hora, ese tiempo debe de gastarse en los turnos de Gerocultora 2 del sábado o domingo junto a la Gerocultora 2 que hubiese asignada a esa hora, es decir, que habría 1 persona más trabajando en ese horario
+
 - Se permite cierta flexibilidad en la rotación de fines de semana
 
 - Es preferible que una persona que trabaje el fin de semana lo haga ambos días
-
-- No hay preferencias o restricciones a tenerse en cuenta
 
 - Formato de salida para el cuadrante: HTML

@@ -5,11 +5,17 @@
 - Para que se vean mejor lo trabajado y lo extra es mejor crear una tabla - HECHO
 
 ---- PERSONAL
-- Modificar la tabla para que se vea mejor, más legible. P.ej: Filas/Horas y Columnas/Días
+- Modificar la tabla para que se vea mejor, más legible. P.ej: Filas/Horas y Columnas/Días - HECHO
 
 ---- FACTURAS
 - En las facturas añadir las letras de debajo de la factura a papel
 - Hacer las facturas dinámicas, para que se puedan modificar desde el Excel y se pongan directamente en el HTML
+
+---- EXTRAS
+- Hablar con Google para la indexacion de la página web
+- Hablar con Google para cambiar los datos del centro
+
+
 
 ------------- PREGUNTAS ----------------
 ---- GEROCULTORAS

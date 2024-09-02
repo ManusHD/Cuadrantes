@@ -1,8 +1,8 @@
 const trabajadores = [
-    { nombre: "Amadori", rol: ["Gerocultora", "Cocinero"], horas: 26, trabajadas: 0, extras: 0 },
-    { nombre: "Mavi", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "David", rol: "Cocinero", horas: 40, trabajadas: 0, extras: 0 },
     { nombre: "Susi", rol: ["Gerocultora", "Cocinero"], horas: 25, trabajadas: 0, extras: 0 },
+    { nombre: "Amadori", rol: ["Gerocultora", "Cocinero"], horas: 26, trabajadas: 0, extras: 0 },
+    { nombre: "Mavi", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "Nines", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "Raquel", rol: "Gerocultora", horas: 24, trabajadas: 0, extras: 0 },
 ];
@@ -20,6 +20,8 @@ const nombreDias = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado
 var cuadrante = [[], [], [], [], [], [], []];
 var soluciones = [];
 const maxSoluciones = 20;
+var nSolucionesEncontradas = 0;
+var nSolucionesNoEncontradas = 0;
 
 function esAsignacionValida(trabajador, puesto, dia) {
     const yaAsignado = cuadrante[dia].some(asignacion => asignacion.trabajador === trabajador.nombre);
@@ -27,6 +29,11 @@ function esAsignacionValida(trabajador, puesto, dia) {
     const puedeDesempenar = Array.isArray(trabajador.rol)
         ? trabajador.rol.includes(puesto.nombre.split(" ")[0])
         : trabajador.rol === puesto.nombre.split(" ")[0];
+    
+    // Restringir trabajadores con horas sobrantes >= 1 a no trabajar sábados ni domingos
+    if (horasRestantes >= 1 && (dia === 5 || dia === 6)) {
+        return false;
+    }
     
     return !yaAsignado && puedeDesempenar && horasRestantes >= puesto.horas;
 }
@@ -53,41 +60,45 @@ function copiarCuadrante() {
 }
 
 function esCuadranteValido() {
-
     for (const trabajador of trabajadores) {
+        // Verificación de días libres consecutivos
         let diasLibres = [];
         for (let i = 0; i < 7; i++) {
             const noTrabajo = !cuadrante[i].some(asignacion => asignacion.trabajador === trabajador.nombre);
             if (noTrabajo) diasLibres.push(i);
         }
 
-        if (diasLibres.length < 1) {
-            return false; // Todos los trabajadores deben librar al menos un día
-        }
+        if (diasLibres.length > 0) {
+            for (let i = 0; i < diasLibres.length - 1; i++) {
+                if (diasLibres[i + 1] !== diasLibres[i] + 1) {
+                    return false; // Los días libres no son consecutivos
+                }
+            }
 
-        // Verificar si se libra el sábado, se debe librar el domingo
-        if (diasLibres.includes(5) && !diasLibres.includes(6)) {
-            return false;
-        }
+            // Verificar si se libra el sábado, se debe librar el domingo
+            if (diasLibres.includes(5) && !diasLibres.includes(6)) {
+                return false;
+            }
 
-        // Verificar si se trabaja el sábado, se debe trabajar el domingo
-        if (!diasLibres.includes(5) && diasLibres.includes(6)) {
-            return false;
+            // Verificar si se trabaja el sábado, se debe trabajar el domingo
+            if (!diasLibres.includes(5) && diasLibres.includes(6)) {
+                return false;
+            }
         }
     }
-
     return true;
 }
 
-var noValido = 0;
 function resolverCuadrante(dia = 0, puestoIndex = 0) {
     if (soluciones.length >= maxSoluciones) return;
     if (dia === 7) {
         if (esCuadranteValido()) {
             soluciones.push(copiarCuadrante());
+            nSolucionesEncontradas++;
+            console.log( "Soluciones encontradas: " + nSolucionesEncontradas);
         }else{
-            noValido++;
-            console.log(noValido);
+            nSolucionesNoEncontradas++;
+            console.log(nSolucionesNoEncontradas);
         }
         return;
     }
@@ -124,7 +135,7 @@ function mostrarCuadrante(cuadrante, index) {
 
         dia.forEach(puesto => {
             let p = document.createElement("td");
-            p.textContent = `${puesto.trabajador} - Total: ${puesto.objTrabajador.trabajadas} - Restantes: ${puesto.objTrabajador.horas - puesto.objTrabajador.trabajadas}`;
+            p.textContent = `${puesto.trabajador} - Restantes: ${puesto.objTrabajador.horas - puesto.objTrabajador.trabajadas}`;
             tr.appendChild(p);
         });
 
