@@ -19,7 +19,7 @@ a:hover {
     margin-bottom: 15px;
 }
 
-.input-cuadrante input{
+.input-cuadrante input {
     padding: 7px;
 }
 
@@ -61,10 +61,17 @@ td {
     text-align: center;
 }
 
-td{
+td {
     min-width: 16px;
 }
 
 th {
     background-color: #669bbc;
+}
+
+@media print {
+    #cuadrante {
+        page-break-before: always;
+        page-break-after: always;
+    }
 }
