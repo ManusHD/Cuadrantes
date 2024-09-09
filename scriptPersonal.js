@@ -1,8 +1,8 @@
 const trabajadores = [
     { nombre: "Amadori", rol: ["Gerocultora", "Cocinero"], horas: 26, trabajadas: 0, extras: 0 },
-    { nombre: "Mavi", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "David", rol: "Cocinero", horas: 40, trabajadas: 0, extras: 0 },
     { nombre: "Susi", rol: ["Gerocultora", "Cocinero"], horas: 25, trabajadas: 0, extras: 0 },
+    { nombre: "Mavi", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "Nines", rol: ["Gerocultora", "Reparto"], horas: 30, trabajadas: 0, extras: 0 },
     { nombre: "Raquel", rol: "Gerocultora", horas: 24, trabajadas: 0, extras: 0 },
 ];
@@ -74,6 +74,13 @@ function esCuadranteValido() {
         if (!diasLibres.includes(5) && diasLibres.includes(6)) {
             return false;
         }
+
+        if (trabajador.nombre === 'Raquel' && ((trabajador.horas - trabajador.trabajadas) > 0)) {
+            console.log(`Muchas horas para ${trabajador.nombre}`);
+            return false;
+        }
+
+
     }
 
     return true;
