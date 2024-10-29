@@ -307,12 +307,12 @@ function mostrarHorasTrabajadas() {
     const tbody = document.querySelector("#trabajado tbody");
     tbody.innerHTML = '';
 
-    personas.forEach(persona => {
+    personas.forEach((persona, index) => {
 
         let tr = document.createElement("tr");
 
         let p = document.createElement("td");
-        p.textContent = persona.nombre;
+        p.textContent = index + 1;
 
         let turnosTrabajados = document.createElement("td");
         turnosTrabajados.textContent = (persona.hExtra + persona.hUsadas) / 8;
