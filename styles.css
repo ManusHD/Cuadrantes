@@ -73,5 +73,7 @@ th {
     #cuadrante {
         page-break-before: always;
         page-break-after: always;
+        padding: 50px;
+        padding: 20px;
     }
 }

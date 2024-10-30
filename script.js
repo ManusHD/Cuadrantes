@@ -31,6 +31,8 @@ var ciclo = [
     { nombre: 'Día 4', turnos: [], horas: 0 }
 ];
 
+var ponderaciones = [];
+
 var turnos = 0;
 var horasMes = 0;
 var cuadrante;
@@ -148,6 +150,18 @@ function cargarPersonas() {
             });
 
         });
+}
+
+function cargarPonderaciones() {
+    fetch('https://sheets.googleapis.com/v4/spreadsheets/1PEJsta5NLLjPgiaL4GCMc-e1MW-ykzG93et-6Zqb4xs/values/Extras!B2:B4?key=AIzaSyD1qXjPmgBaRtX0zJtH76nvU708Gvs3A-g')
+    .then(response => response.json())
+    .then(data => {
+        const ponderacionesAux = data.values;
+        ponderacionesAux.forEach(p => {
+            ponderaciones.push(p[0].replace(',', '.'));
+            console.log(p[0].replace(',', '.'));
+        });
+    })
 }
 
 function esSuperfestivo(fecha) {
@@ -300,9 +314,13 @@ function mostrarCuadrante() {
 // Mostrar horas trabajadas y extras en el HTML
 function mostrarHorasTrabajadas() {
 
-    const pDomingo = 21.25;  // Ponderación para los domingos
-    const pNoche = 18;    // Ponderación para las noches
-    const pSuperfestivo = 37.51;    // Ponderación para las noches
+    const pNoche = ponderaciones[0];    // Ponderación para las noches
+    const pDomingo = ponderaciones[1];  // Ponderación para los domingos
+    const pSuperfestivo = ponderaciones[2];    // Ponderación para las noches
+
+    console.log(pNoche);
+    console.log(pDomingo);
+    console.log(pSuperfestivo);
 
     const tbody = document.querySelector("#trabajado tbody");
     tbody.innerHTML = '';
@@ -367,6 +385,7 @@ function mostrarHorasTrabajadas() {
 
 function main() {
     cargarPersonas();
+    cargarPonderaciones();
 }
 
 main();
