@@ -330,7 +330,8 @@ function mostrarHorasTrabajadas() {
         let tr = document.createElement("tr");
 
         let p = document.createElement("td");
-        p.textContent = index + 1;
+        p.textContent = index + 1; // Aparecen los números de las gerocultoras
+        // p.textContent = persona.nombre; // Aparecen los nombres de las gerocultoras
 
         let turnosTrabajados = document.createElement("td");
         turnosTrabajados.textContent = (persona.hExtra + persona.hUsadas) / 8;
