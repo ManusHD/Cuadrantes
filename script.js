@@ -153,7 +153,7 @@ function cargarPersonas() {
 }
 
 function cargarPonderaciones() {
-    fetch('https://sheets.googleapis.com/v4/spreadsheets/1PEJsta5NLLjPgiaL4GCMc-e1MW-ykzG93et-6Zqb4xs/values/Extras!B2:B4?key=AIzaSyD1qXjPmgBaRtX0zJtH76nvU708Gvs3A-g')
+    fetch('https://sheets.googleapis.com/v4/spreadsheets/1ClZOrSrR-58A-6x10Jv4HhJfZSPpfjjfp_aPKGgY4I8/values/Extras!B2:B4?key=AIzaSyD1qXjPmgBaRtX0zJtH76nvU708Gvs3A-g')
     .then(response => response.json())
     .then(data => {
         const ponderacionesAux = data.values;
